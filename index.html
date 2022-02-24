@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Ubuntu:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.min.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/44e2ab4de4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.4/dist/sweetalert2.min.js"></script>
+    <script>
+      const setuju = () => {
+        Swal.fire({
+          title: 'Apakah anda setuju?',
+          text: "Transaksi tidak bisa di batalkan",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Lanjutkan'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Transaksi diproses',
+              'Permintaan untuk melanjutkan diterima',
+              'success'
+            )
+          }
+        })
+      }
+      const tolak = () => {
+        Swal.fire({
+          title: 'Apakah anda yakin?',
+          text: "Anda tidak bisa membatalkan permintaan batal setelah ini",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Lanjutkan'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire(
+              'Penolakan diproses',
+              'Permintaan untuk menolak diterima',
+              'success'
+            )
+          }
+        })
+      }
+    </script>
+    <style>
+      .ubuntu {
+        font-family: 'Ubuntu', sans-serif;
+      }
+      .poppins {
+        font-family: 'Poppins', sans-serif;
+      }
+      .drop-shadow {
+        filter: drop-shadow(0px 0px 10px rgba(0,0,0,.5));
+      }
+      .card-body-subject {
+        font-weight: 700;
+      }
+      .card-body-value, .card-body-subject-small {
+        font-size: 0.8em;
+      }
+      hr.hr--logo {
+        border-top: solid #000 1px;
+        margin: 50px 0;
+      }
+      hr.hr--logo:after {
+        content: url( './buyung\ kecik.png' );
+        /* Controls the position of the logo */
+        left: 50%;
+        position: absolute;
+        transform: translateY(-50%) translateX(-50%);
+        /* Controls the whitespace around the symbol */
+        padding: 10px;
+        background: #fff;
+      }
+      .table-td > td {
+        padding: 1em 0.3em;
+      }
+      .products > tr:nth-child(odd) {
+        background-color: rgb(190, 255, 192);
+      }
+      .products > tr:nth-child(even) {
+        background-color: rgb(194, 194, 194);
+      }
+      .notification-area {
+        margin: 0.3em 0;
+        padding: 1em;
+        border: 1px solid transparent;
+        border-radius: 1em;
+        display: flex;
+        filter: drop-shadow(0px 0px 5px rgba(0,0,0,.3));
+      }
+      .notification-area.info {
+        background-color: rgb(162, 181, 236);
+      }
+      .notification-area.warning {
+        background-color: rgb(246, 224, 152);
+      }
+      .notification-area.success {
+        background-color: rgb(152, 246, 179);
+      }
+      .notification-area.love {
+        background-color: rgb(240, 152, 246);
+      }
+      .notification-area.hate {
+        background-color: rgb(248, 113, 113);
+      }
+      .notif-icon, .notif-message {
+        padding: 0.2em;
+        font-family: 'Ubuntu', sans-serif;
+        font-weight: 300;
+        font-size: 0.8em;
+      }
+      .notif-message-title {
+        font-weight: 700;
+      }
+      .btn {
+        width: 180px;
+        padding: 0.6em;
+        border: 1px solid transparent;
+        border-radius: 0.5em;
+        filter: drop-shadow(0px 0px 10px rgba(0,0,0,.5));
+      }
+      .btn:hover {
+        filter: saturate(200%) brightness(70%) drop-shadow(0px 0px 10px rgba(0,0,0,.5));
+      }
+      .btn:active {
+        filter: saturate(300%) brightness(60%) drop-shadow(0px 0px 15px rgba(0,0,0,.5));
+      }
+      .btn.accept {
+        background-color: green;
+        color: white;
+      }
+      .btn.reject {
+        background-color: black;
+        color: white;
+      }
+      .swal2-popup {
+        font-family: 'Ubuntu', sans-serif;
+      }
+      .wrapper {
+        width: 50vw;
+      }
+      .master-title {
+        font-size: 2.4em; 
+      }
+
+      @media (max-width: 767px) {
+        .wrapper {
+          width: 90vw;
+        }
+        .master-title {
+          font-size: 1.7em; 
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div style="display: flex; justify-content: center;">
+      <img alt="" src="https://k-mart.co.id/_next/image?url=%2Fimages%2Fkmart-logo.png&w=48&q=75" style="margin-top: 1em; margin-bottom: 1em;" class="drop-shadow">
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="wrapper">
+        <div class="card-title poppins master-title" style="display: flex; justify-content: center; margin-bottom: 1em;">Konfirmasi COD</div>
+        <div style="display: flex; justify-content: center;">
+          <div class="wrapper">
+            <div class="notification-area love">
+              <div class="notif-icon">
+                <i class="fa-solid fa-heart" style="color: white;"></i>
+              </div>
+              <div class="notif-message">
+                <div class="notif-message-title">
+                  Pesanan diproses
+                </div>
+                <div class="notif-message-body">
+                  Pesanan ini sudah di ambil oleh WADIDAW!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; justify-content: center;">
+          <div class="wrapper">
+            <div class="notification-area hate">
+              <div class="notif-icon">
+                <i class="fa-solid fa-frown" style="color: white;"></i>
+              </div>
+              <div class="notif-message">
+                <div class="notif-message-title">
+                  Pesanan dibatalkan
+                </div>
+                <div class="notif-message-body">
+                  Pesanan ini sudah dibatalkan atas permintaan penerima
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="display: table; justify-content: space-between; margin-top: 0.6em; margin-bottom: 1.6em;" class="ubuntu">
+          <div class="card-body-subject-small" style="font-style: italic;">Transaction Date</div>
+          <div class="card-body-value">24 Feb 2022</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 0.6em" class="ubuntu">
+          <div class="card-body-subject">Order Number :</div>
+          <div style="color: green;" class="drop-shadow">INV-220224-GGQQ3IV</div>
+        </div>
+        <div style="display: table; justify-content: space-between; margin-top: 0.6em;" class="ubuntu">
+          <div class="card-body-subject">Seller Name :</div>
+          <div class="card-body-value">SRI WAHYU</div>
+        </div>
+        <div style="display: table; justify-content: space-between; margin-top: 0.6em;" class="ubuntu">
+          <div class="card-body-subject">Recipient Name :</div>
+          <div class="card-body-value">SRI WAHYU</div>
+        </div>
+        <div style="display: table; justify-content: space-between; margin-top: 0.6em;" class="ubuntu">
+          <div class="card-body-subject">Recipient Address :</div>
+          <div class="card-body-value">KECAMATAN CAKUNG, JAKARTA TIMUR, DAERAH KHUSUS IBUKOTA JAKARTA, 13910, INDOMNESIA - LEWAT GANG SEMPIT KEL., KAB. JAKARTA TIMUR, PROV. DAERAH KHUSUS IBUKOTA JAKARTA</div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 0.6em" class="ubuntu">
+          <div class="card-body-subject">Total Payment :</div>
+          <div>410,000</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 3em; margin-bottom: 3em;">
+      <hr class="hr--logo">
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="wrapper">
+        <div class="card-title poppins" style="display: flex; justify-content: center; font-size: 1.4em; margin-bottom: 1em;">Rincian Produk</div>
+        <table style="width: 100%;">
+          <thead>
+            <tr style="text-align: left; background-color: black; color: white;" class="poppins">
+              <th style="width: 25%; font-size: 0.8em; padding: 0.7em 0.3em;">Product Code :</th>
+              <th style="width: 60%; font-size: 0.8em; padding: 0.7em 0.3em;">Name :</th>
+              <th style="width: 15%; font-size: 0.8em; padding: 0.7em 0.3em;">Qty :</th>
+            </tr>
+          </thead>
+          <tbody class="products">
+            <tr style="text-align: left; font-size: 0.9em; font-weight: 400;" class="ubuntu table-td">
+              <td valign="top">ABC123</td>
+              <td valign="top">Kecap ABC</td>
+              <td valign="top" align="center">1</td>
+            </tr>
+            <tr style="text-align: left; font-size: 0.9em; font-weight: 400;" class="ubuntu table-td">
+              <td valign="top">MUGUNGHWA</td>
+              <td valign="top">MUGUNGHWA KOCHI PIEOTSUMIDA DOR DOR DOR</td>
+              <td valign="top" align="center">2</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="margin-top: 3em; margin-bottom: 3em;">
+      <hr class="hr--logo">
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="wrapper">
+        <div class="notification-area info">
+          <div class="notif-icon">
+            <i class="fa-solid fa-circle-exclamation"></i>
+          </div>
+          <div class="notif-message">
+            <div class="notif-message-title">
+              Perhatian!
+            </div>
+            <div class="notif-message-body">
+              Apakah Pesanan ini disetujui untuk diproses dan dikirim sesuai data yang telah disebutkan diatas ?
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="wrapper">
+        <div class="notification-area warning">
+          <div class="notif-icon">
+            <i class="fa-solid fa-triangle-exclamation"></i>
+          </div>
+          <div class="notif-message">
+            <div class="notif-message-body">
+              Pesanan yang disetujui tidak akan dapat diubah!
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center;">
+      <div class="wrapper">
+        <div class="notification-area success">
+          <div class="notif-icon">
+            <i class="fa-solid fa-face-smile"></i>
+          </div>
+          <div class="notif-message">
+            <div class="notif-message-title">
+              Pesanan disetujui!
+            </div>
+            <div class="notif-message-body">
+              Pesanan akan diproses secepatnya, terima kasih🙏
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: center; margin: 1.5em 0;">
+      <div class="wrapper" style="display: flex; justify-content: space-around;">
+        <button type="button" class="btn accept" onclick="setuju();">
+          <i class="fa-solid fa-thumbs-up" style="margin-right: 8px;"></i>
+          SETUJU
+        </button>
+        <button type="button" class="btn reject" onclick="tolak();">
+          <i class="fa-solid fa-thumbs-down" style="margin-right: 8px;"></i>
+          BATAL
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
